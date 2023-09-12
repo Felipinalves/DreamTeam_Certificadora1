@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+
+.Sign-in {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+  color: #303841"
+
+}
+
+.TextIntern {
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+  color: #303841"
+
+}
+
+.TextButton {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+}
+
+.bg-light {
+  background-color: #EAF3FB !important;
+}
+
+.bg-nav {
+  background-color: #2185D5 !important;
+}
+
+.TextNav {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: "Inter", sans-serif;
+  color: #FFFFFF !important;
+}
+
+.TextGoogle {
+  font-size: 14px;
+  font-weight: normal;
+  font-family: "Inter", sans-serif;
+  color: #303841 !important
+}
+
+.titulo {
+  font-size: 16px;
+  font-weight: normal;
+  font-family: "Inter", sans-serif;
+  color: #303841"
+
+}
+
+.dificuldade {
+  font-size: 14px;
+  font-weight: normal;
+  font-family: "Inter", sans-serif;
+  color: #303841"
+
+}
