@@ -1,6 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword} from "firebase/auth";
+import { getFirestore, doc, setDoc, updateDoc, serverTimestamp } from "firebase/firestore"; 
+
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,30 +21,45 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
-const provider = new GoogleAuthProvider();
+// Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
 
-export const signInGoogle = (event) => {
-    event.preventDefault();
-    signInWithPopup(auth, provider)
-    .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      // The signed-in user info.
-      const user = result.user;
-      // IdP data available using getAdditionalUserInfo(result)
-      // ...
-    }).catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
+
+//Email SingUp and SingIn
+export const signUpEmail = async (e) => {
+  e.preventDefault()
+  const email = e.target[0].value;
+  const password = e.target[1].value;
+  
+  try{
+    const res = await createUserWithEmailAndPassword(auth, email, password)
+    const addDoc = await setDoc(doc(db, "users", res.user.uid ), {
+      uid: res.user.uid,
+      email: res.user.email,
+      level: 1
     });
-    console.log('Fiz algo')
+
+  }catch(err){
+    alert('Algo errado tente novamente')
+  }
+}
+
+//Google SignUp and SingIn
+const provider = new GoogleAuthProvider();
+export const signInGoogle = async (event) => {
+  event.preventDefault();
+  try{
+    const res = await signInWithPopup(auth, provider)
+    const addDoc = await setDoc(doc(db, "users", res.user.uid ), {
+      uid: res.user.uid,
+      email: res.user.email,
+      level: 1
+    });
+
+  }catch(err){
+    alert('Algo errado tente novamente')
+  }
+    
 }
