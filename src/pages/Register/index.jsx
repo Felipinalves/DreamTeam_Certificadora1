@@ -1,15 +1,15 @@
 import React from 'react'
 import { signInGoogle, signUpEmail } from '../../firebase'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export const Register = () => {
     const navigate = useNavigate();
-    const signUpwithEmail = (e) => {
-        signUpEmail(e)
+    const signUpwithEmail = async(e) => {
+        await signUpEmail(e)
         navigate('/')
     }
-    const signInwithGoogle = (e) => {
-        signInGoogle(e)
+    const signInwithGoogle = async(e) => {
+        await signInGoogle(e)
         navigate('/')
     }
   return (
@@ -50,7 +50,7 @@ export const Register = () => {
                             </div>
                             
                             <div className="mb-3 text-center">
-                                <a >Já possui uma conta?</a> <a href="login.html" >Entrar</a>
+                                <span  >Já possui uma conta?</span> <Link to='/login'>Entrar</Link>
                             </div>
 
                         </form>

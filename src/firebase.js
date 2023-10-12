@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword} from "firebase/auth";
-import { getFirestore, doc, setDoc, updateDoc, serverTimestamp } from "firebase/firestore"; 
+import { getFirestore, doc, setDoc, getDoc, updateDoc, serverTimestamp } from "firebase/firestore"; 
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -26,6 +26,22 @@ export const auth = getAuth(app);
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
+//set user information
+const setUserInformation = async (res) =>{
+  const docRef = doc(db,"users", res.user.uid)
+  const docSnap = await getDoc(docRef)
+
+  console.log('aqui')
+  console.log(docSnap.exists)
+
+  if (docSnap.exists()){
+    const addDoc = await setDoc(docRef, {
+      uid: res.user.uid,
+      email: res.user.email,
+      level: 1
+    });
+  }
+}
 
 //Email SingUp and SingIn
 export const signUpEmail = async (e) => {
@@ -42,6 +58,8 @@ export const signUpEmail = async (e) => {
     });
 
   }catch(err){
+    console.log('Erro')
+    console.log(err)
     alert('Algo errado tente novamente')
   }
 }
@@ -52,13 +70,12 @@ export const signInGoogle = async (event) => {
   event.preventDefault();
   try{
     const res = await signInWithPopup(auth, provider)
-    const addDoc = await setDoc(doc(db, "users", res.user.uid ), {
-      uid: res.user.uid,
-      email: res.user.email,
-      level: 1
-    });
+
+    await setUserInformation(res)
 
   }catch(err){
+    console.log('Erro')
+    console.log(err)
     alert('Algo errado tente novamente')
   }
     

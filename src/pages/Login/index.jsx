@@ -1,12 +1,12 @@
 import React from 'react'
 import { signInGoogle } from '../../firebase'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 export const Login = () => {
     const navigate = useNavigate();
-    const signInwithGoogle = (e) => {
-        signInGoogle(e)
+    const signInwithGoogle = async (e) => {
+        await signInGoogle(e)
         navigate('/')
     }
   return (  
@@ -43,6 +43,10 @@ export const Login = () => {
                                     <i className="bi bi-google"></i>
                                     <span>Entrar com Google</span>
                                 </button>
+                            </div>
+
+                            <div className="mb-3 text-center">
+                            <span style={{fontSize: '14px'}}>Não possui uma conta?</span> <Link to="/register" >Inscrever-se</Link>
                             </div>
                         </form>
                     </main>
