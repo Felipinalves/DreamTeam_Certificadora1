@@ -32,9 +32,9 @@ const setUserInformation = async (res) =>{
   const docSnap = await getDoc(docRef)
 
   console.log('aqui')
-  console.log(docSnap.exists)
+  console.log(docSnap.exists())
 
-  if (docSnap.exists()){
+  if (!docSnap.exists()){
     const addDoc = await setDoc(docRef, {
       uid: res.user.uid,
       email: res.user.email,
@@ -54,7 +54,8 @@ export const signUpEmail = async (e) => {
     const addDoc = await setDoc(doc(db, "users", res.user.uid ), {
       uid: res.user.uid,
       email: res.user.email,
-      level: 1
+      level: 1,
+      score: 0
     });
 
   }catch(err){
