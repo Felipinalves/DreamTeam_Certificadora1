@@ -16,7 +16,7 @@ export const QuestionsCards = (props) => {
 	}
 
   return (
-    <div className="accordion" id="accordionPanelsStayOpenExample">
+    <div className="accordion" id="accordionPanelsStayOpenExample" style={{marginLeft:"8px", marginRight:"8px"}}>
 		<div className="accordion-item">
 			<h2 className="accordion-header">
 				<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse"

@@ -36,7 +36,7 @@ export const Home = () => {
   return (
     <>
     
-      <div className="mb-3 margin-t" >
+      <div className="mb-3" style={{marginTop: "88px", marginLeft: "8px"}}>
         <h3 >Questões</h3>
 	    </div>
 
