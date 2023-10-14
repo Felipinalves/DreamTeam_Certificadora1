@@ -1,15 +1,37 @@
 import React from 'react'
 import './home.css';
 import { QuestionsCards } from '../../components/QuestionsCards';
+import { getQuestions } from '../../firebase';
+import { useState, useEffect } from 'react';
 
-const { useState } = React;
+
 
 export const Home = () => {
   const [isIconClicked, setIsIconClicked] = useState(false);
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getQuestions();
+      const allQuestions = response.docs.map((doc) => doc.data())
+      let sortedQuestions = allQuestions.sort(
+        (q1, q2) => (q1.level < q2.level) ? 1 : (q1.level > q2.level) ? -1 : 0);
+      setQuestions(sortedQuestions)
+
+     
+    };
+
+    fetchData()
+  }, []);
+  
+  console.log(questions)
 
   const handleClick = () => {
       setIsIconClicked(!isIconClicked);
+      setQuestions(questions.reverse())
   };
+
+
 
   return (
     <>
@@ -18,13 +40,16 @@ export const Home = () => {
         <h3 >Questões</h3>
 	    </div>
 
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-1">
+      <div className="d-grid gap-2 d-md-flex justify-content-md-end mb-1">
         <button className="btn btn-light me-md-2" type="button" onClick={(handleClick)}>
           {isIconClicked ? <i className ="bi bi-sort-up" style={{fontSize:20}} /> : <i className ="bi bi-sort-down" style={{fontSize:20}} />}
         </button>
       </div>
 
-      <QuestionsCards title='Blablabla' description ='djkdhfjhkasgfasdgfa' level={1}/>
+      {questions.map((question) => <QuestionsCards key={question.title} title={question.title} description = {question.description} level={question.level}/>)}
+      {/* <div>{questions[0].level}</div> */}
+      
+      
     </>
   )
 }

@@ -2,6 +2,7 @@ import React from 'react'
 
 export const QuestionsCards = (props) => {
 	const questionLevel = (level) =>{
+		console.log(typeof level)
 		switch (level) {
 			case 0:
 				return ['Fácil', '#05FF00'];
@@ -13,6 +14,7 @@ export const QuestionsCards = (props) => {
 				break;
 		}
 	}
+
   return (
     <div className="accordion" id="accordionPanelsStayOpenExample">
 		<div className="accordion-item">

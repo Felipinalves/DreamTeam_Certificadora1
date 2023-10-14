@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword} from "firebase/auth";
-import { getFirestore, doc, setDoc, getDoc, updateDoc, serverTimestamp } from "firebase/firestore"; 
+import { getFirestore, doc, setDoc, getDoc,collection, getDocs, updateDoc, serverTimestamp } from "firebase/firestore"; 
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -31,7 +31,7 @@ const setUserInformation = async (res) =>{
   const docRef = doc(db,"users", res.user.uid)
   const docSnap = await getDoc(docRef)
 
-  console.log('aqui')
+
   console.log(docSnap.exists())
 
   if (!docSnap.exists()){
@@ -81,3 +81,10 @@ export const signInGoogle = async (event) => {
   }
     
 }
+
+//get questions
+export const getQuestions = async() => {
+  const querySnapshot =  await getDocs(collection(db, "questions"));
+  return querySnapshot
+}
+
