@@ -26,7 +26,7 @@ export const QuestionsCards = (props) => {
 						<div className="titulo col-10">
 							{props.title}
 						</div>
-						<div className="dificuldade col-2">
+						<div className="dificuldade col-2 text-center">
 							<span style={{color:questionLevel(props.level)[1]}} >● </span>
 							{questionLevel(props.level)[0]}
 						</div>
@@ -34,8 +34,16 @@ export const QuestionsCards = (props) => {
 				</button>
 			</h2>
 			<div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse">
-				<div className="accordion-body" style={{color:'#303841'}}>
-					{props.description}
+				<div className="accordion-body row" style={{color:'#303841'}}>
+						<div className='col-10 p-1 TextAcordeon'>
+							{props.description}	
+						</div>
+						<div className='col-2 p-0 text-center'>
+							<span className='Pontuacao'>0 pontos</span>
+							<div className='mt-3'>
+								<button className="TextButton_Acordeon btn btn-primary w-70 py-0" type="submit">Responder</button>
+							</div>
+						</div>
 				</div>
 			</div>
 		</div>

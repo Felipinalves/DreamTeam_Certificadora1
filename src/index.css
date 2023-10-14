@@ -10,6 +10,14 @@
 
 }
 
+.Pontuacao {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+  color: #303841
+
+}
+
 .TextIntern {
   font-size: 16px;
   font-weight: 400;
@@ -18,8 +26,22 @@
 
 }
 
+.TextAcordeon {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+  color: #303841
+
+}
+
 .TextButton {
   font-size: 16px;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+}
+
+.TextButton_Acordeon {
+  font-size: 14px;
   font-weight: 600;
   font-family: "Inter", sans-serif;
 }
