@@ -15,7 +15,7 @@ export const Home = () => {
       const response = await getQuestions();
       const allQuestions = response.docs.map((doc) => doc.data())
       let sortedQuestions = allQuestions.sort(
-        (q1, q2) => (q1.level < q2.level) ? 1 : (q1.level > q2.level) ? -1 : 0);
+        (q1, q2) => (q2.level < q1.level) ? 1 : (q2.level > q1.level) ? -1 : 0);
       setQuestions(sortedQuestions)
 
      
