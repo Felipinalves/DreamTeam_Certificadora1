@@ -46,11 +46,11 @@ export const Home = () => {
   return (
     <>
     
-      <div className="mb-3" style={{marginTop: "88px", marginLeft: "8px"}}>
+      <div className="mb-2" style={{marginTop: "84px", marginLeft: "8px"}}>
         <h3 >Questões</h3>
 	    </div>
 
-      <div className="d-grid gap-2 d-md-flex justify-content-md-end mb-1">
+      <div className="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
         <button className="btn btn-light me-md-2" type="button" onClick={(handleClick)}>
           {isIconClicked ? <i className ="bi bi-sort-up" style={{fontSize:20}} /> : <i className ="bi bi-sort-down" style={{fontSize:20}} />}
         </button>
