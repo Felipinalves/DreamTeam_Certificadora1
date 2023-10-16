@@ -1,10 +1,15 @@
 import React from 'react'
-import { signInGoogle } from '../../firebase'
+import { signInGoogle, signInEmail} from '../../firebase'
 import { Link, useNavigate } from 'react-router-dom';
 
 
 export const Login = () => {
     const navigate = useNavigate();
+    const signInWithEmail = async (e) => {
+        console.log(e.target)
+        await signInEmail(e)
+        navigate('/')
+    }
     const signInwithGoogle = async (e) => {
         await signInGoogle(e)
         navigate('/')
@@ -20,7 +25,7 @@ export const Login = () => {
             <div className="card col-sm-12 col-md-6 col-lg-4 mt-5">
                 <div className="card-body">
                     <main className="form-signin w-100 m-auto">
-                        <form>
+                        <form onSubmit={ signInWithEmail }>
                             <h1 className="Sign-in my-4">Login</h1>
                             <div className="form-floating mb-2">
                                 <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"/>
@@ -32,9 +37,9 @@ export const Login = () => {
                                 <label className="TextIntern" htmlFor="floatingPassword">Senha</label>
                             </div>
                             
-                            <div className="mb-3 float-end">
+                            {/* <div className="mb-3 float-end">
                                 <a href="#">Esqueceu a senha?</a>
-                            </div>
+                            </div> */}
 
                             <button className="TextButton btn btn-primary w-100 py-2 mb-3" type="submit">Entrar</button>
 

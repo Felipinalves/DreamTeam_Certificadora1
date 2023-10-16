@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword} from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc,collection, getDocs, updateDoc, serverTimestamp } from "firebase/firestore"; 
 
 
@@ -38,7 +38,8 @@ const setUserInformation = async (res) =>{
     const addDoc = await setDoc(docRef, {
       uid: res.user.uid,
       email: res.user.email,
-      level: 1
+      level: 1,
+      score: 0
     });
   }
 }
@@ -51,17 +52,25 @@ export const signUpEmail = async (e) => {
   
   try{
     const res = await createUserWithEmailAndPassword(auth, email, password)
-    const addDoc = await setDoc(doc(db, "users", res.user.uid ), {
-      uid: res.user.uid,
-      email: res.user.email,
-      level: 1,
-      score: 0
-    });
+    await setUserInformation(res)
 
   }catch(err){
     console.log('Erro')
     console.log(err)
-    alert('Algo errado tente novamente')
+    alert('Algo deu errado, tente novamente')
+  }
+}
+
+export const signInEmail = async(e)=>{
+  e.preventDefault()
+  const email = e.target[0].value;
+  const password = e.target[1].value;
+
+  try{
+    const res = await signInWithEmailAndPassword(auth,email,password)
+
+  }catch(err){
+    console.log(err)
   }
 }
 

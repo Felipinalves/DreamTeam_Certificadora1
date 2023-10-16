@@ -3,6 +3,7 @@ import './home.css';
 import { QuestionsCards } from '../../components/QuestionsCards';
 import { getQuestions } from '../../firebase';
 import { useState, useEffect } from 'react';
+import { doc } from 'firebase/firestore';
 
 
 
@@ -13,7 +14,16 @@ export const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await getQuestions();
-      const allQuestions = response.docs.map((doc) => doc.data())
+      console.log(response)
+      const allQuestions = []
+      // const allQuestions = response.docs.map((doc) =>doc.data())
+      response.forEach((element) => {
+        const item = element.data()
+        item.id = element.id
+        allQuestions.push(item) 
+        console.log(item)       
+      });
+      
       let sortedQuestions = allQuestions.sort(
         (q1, q2) => (q2.level < q1.level) ? 1 : (q2.level > q1.level) ? -1 : 0);
       setQuestions(sortedQuestions)
@@ -46,8 +56,8 @@ export const Home = () => {
         </button>
       </div>
 
-      {questions.map((question) => <QuestionsCards key={question.title} title={question.title} description = {question.description} level={question.level}/>)}
-      {/* <div>{questions[0].level}</div> */}
+      {questions.map((question) => <QuestionsCards key={question.id} id={question.id} title={question.title} description = {question.description} level={question.level}/>)}
+  
       
       
     </>

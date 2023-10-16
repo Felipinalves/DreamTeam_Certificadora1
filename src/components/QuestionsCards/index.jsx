@@ -1,8 +1,13 @@
 import React from 'react'
+import { useState } from 'react';
 
 export const QuestionsCards = (props) => {
+
+	const[show, setShow] = useState(false)
+	const showItem = () => setShow(!show)
+
 	const questionLevel = (level) =>{
-		console.log(typeof level)
+
 		switch (level) {
 			case 0:
 				return ['Fácil', '#05FF00'];
@@ -16,11 +21,10 @@ export const QuestionsCards = (props) => {
 	}
 
   return (
-    <div className="accordion" id="accordionPanelsStayOpenExample" style={{marginLeft:"8px", marginRight:"8px"}}>
-		<div className="accordion-item">
-			<h2 className="accordion-header">
-				<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-					data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
+    <div className="accordion" style={{marginLeft:"8px", marginRight:"8px"}}>
+		<div className="accordion-item" >
+			<h2 className="accordion-header" onClick={showItem}>
+				<button className={show ? "accordion-button" : "accordion-button collapsed"} type="button" 
 					aria-controls="panelsStayOpen-collapseOne" style={{color: '#303841'}}>
 					<div className="row w-100 align-items-center">
 						<div className="titulo col-10">
@@ -33,7 +37,7 @@ export const QuestionsCards = (props) => {
 					</div>
 				</button>
 			</h2>
-			<div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse">
+			<div id="panelsStayOpen-collapseOne" className={show ? 'accordion-collapse collapse show' : 'accordion-collapse collapse'}>
 				<div className="accordion-body row" style={{color:'#303841'}}>
 						<div className='col-10 p-1 TextAcordeon'>
 							{props.description}	
