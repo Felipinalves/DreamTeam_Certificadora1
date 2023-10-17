@@ -14,14 +14,14 @@ export const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await getQuestions();
-      console.log(response)
+
       const allQuestions = []
       // const allQuestions = response.docs.map((doc) =>doc.data())
       response.forEach((element) => {
         const item = element.data()
         item.id = element.id
         allQuestions.push(item) 
-        console.log(item)       
+      
       });
       
       let sortedQuestions = allQuestions.sort(
@@ -34,7 +34,7 @@ export const Home = () => {
     fetchData()
   }, []);
   
-  console.log(questions)
+
 
   const handleClick = () => {
       setIsIconClicked(!isIconClicked);

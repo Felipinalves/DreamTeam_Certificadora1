@@ -55,7 +55,6 @@ export const signUpEmail = async (e) => {
     await setUserInformation(res)
 
   }catch(err){
-    console.log('Erro')
     console.log(err)
     alert('Algo deu errado, tente novamente')
   }
@@ -84,7 +83,6 @@ export const signInGoogle = async (event) => {
     await setUserInformation(res)
 
   }catch(err){
-    console.log('Erro')
     console.log(err)
     alert('Algo errado tente novamente')
   }

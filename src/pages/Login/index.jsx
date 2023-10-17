@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 export const Login = () => {
     const navigate = useNavigate();
     const signInWithEmail = async (e) => {
-        console.log(e.target)
+
         await signInEmail(e)
         navigate('/')
     }
