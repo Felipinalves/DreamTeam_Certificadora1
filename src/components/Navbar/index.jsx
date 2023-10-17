@@ -6,7 +6,7 @@ export function Navbar() {
   return (
     <nav className="navbar bg-body-tertiary bg-nav fixed-top px-1">
       <div className="mx-auto">
-        <div className="TextNav">Neweinstein</div>
+        <div className="TextNav">neweinstein</div>
       </div>
 
       <a className="btn" style={{color:'#2185D5'}}>

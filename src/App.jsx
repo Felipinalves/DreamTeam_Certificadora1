@@ -3,6 +3,8 @@ import { Navbar } from './components/Navbar'
 import { Login } from './pages/Login'
 import { Register } from './pages/Register'
 import { Home } from './pages/Home'
+import {Responder} from './pages/Responder'
+import {Gabarito} from './pages/Gabarito'
 import {
   Route,
   Link,
@@ -39,6 +41,8 @@ function App() {
               }/>
               <Route path='login' element={<Login />}/>
               <Route path='register' element={<Register />}/>
+              <Route path='responder' element={<Responder />}/>
+              <Route path='gabarito' element={<Gabarito />}/>
             </Route>
         </Routes>
       </BrowserRouter>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const QuestionsCards = (props) => {
 
@@ -45,10 +46,9 @@ export const QuestionsCards = (props) => {
 						<div className='col-2 p-0 text-center'>
 							<span className='Pontuacao'>0 pontos</span>
 							<div className='mt-2'>
-								<button className="TextButton_Acordeon btn btn-primary w-70 py-0 px-3" type="submit">Responder</button>
-							</div>
-							<div className='mt-1'>
-								<button className="TextButton_Acordeon btn btn-outline-primary w-70 py-0 px-4" type="submit">Gabarito</button>
+								<Link to='/responder'>
+									<button className="TextButton_Acordeon btn btn-primary w-70 py-0 px-3" type="submit">Responder</button>
+								</Link>
 							</div>
 						</div>
 				</div>
