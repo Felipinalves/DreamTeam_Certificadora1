@@ -45,7 +45,7 @@ export const Login = () => {
 
                             <div className="mb-4">
                                 <button className="btn btn-outline-secondary w-100" onClick={ signInwithGoogle } >
-                                    <i className="bi bi-google"></i>
+                                    <i className="bi bi-google px-1"></i>
                                     <span>Entrar com Google</span>
                                 </button>
                             </div>
