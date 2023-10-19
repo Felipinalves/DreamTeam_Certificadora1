@@ -17,12 +17,33 @@ export const Responder = () => {
             <div className='mb-3 text-end'>
               <span className='Pontuacao' style={{fontSize:"18px"}}>Pontuação: 100pts</span>
             </div>
-            <div className='mb-4'>
+            <div className='mb-3'>
               <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat voluptatibus quae sapiente, vero non mollitia, amet reprehenderit quo eaque alias, magnam sit odit quidem. Quas magnam odio laborum? Officia, velit!</span>
             </div>
-            <div className="form-floating mb-2">
+            <div className="form-floating mb-3">
               <input type="text" className="form-control" id="floatingInput" placeholder="Insira sua resposta"/>
               <label className="TextIntern" htmlFor="floatingInput">Insira sua resposta</label>
+            </div>
+            <div className='mb-2'>
+              <div className='text-start mb-2'>
+                <button className="TextButton_Acordeon btn btn-primary py-1 px-3" type="submit" >Responder</button>
+                {/* sumir com esse botão e apresentar os textos abaixo */}
+              </div>
+              <div className='text-start'>
+                <span className='TextButton_Acordeon'>Sua resposta está correta</span>
+                <span className='TextButton_Acordeon' style={{color:'red'}}>Sua resposta está incorreta</span>
+                <div className='mb-3'>
+                  <span className='TextButton_Acordeon'>A resposta correta é:</span>
+                </div>
+                {/* fazer função para aparecer um ou outro */}
+              </div>
+              <div>
+                <button className="TextButton_Acordeon btn btn-primary py-1 px-3" type="submit">Refazer</button>
+                <Link to='/home'>
+                  <button className="TextButton_Acordeon btn btn-outline-primary py-1 px-3 ms-3" type="submit">Voltar às questões</button>
+                </Link>
+                {/* Se acertou, só aparece o botão de voltar? Ou não? */}
+              </div>
             </div>
           </div>
         </div>
