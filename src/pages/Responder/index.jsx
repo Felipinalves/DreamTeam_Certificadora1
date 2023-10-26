@@ -2,6 +2,7 @@ import React from 'react'
 import { QuestionsCards } from '../../components/QuestionsCards';
 import { getQuestions } from '../../firebase';
 import imagem9334183 from '../../assets/9334243.jpg'
+import { Link } from 'react-router-dom';
 
 
 export const Responder = () => {
