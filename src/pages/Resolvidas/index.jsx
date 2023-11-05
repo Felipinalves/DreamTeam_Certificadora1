@@ -9,7 +9,7 @@ import { AuthContext } from '../../context/AuthContext';
 
 
 
-export const Home = () => {
+export const Resolvidas = () => {
 
   const currentUser = useContext(AuthContext)
   const [isIconClicked, setIsIconClicked] = useState(false);
@@ -52,7 +52,7 @@ export const Home = () => {
         <div className="card col-8">
           <div className='card-body'>
             <div style={{marginTop: "4px", marginLeft: "8px"}}>
-              <h3 >Questões</h3>
+              <h3 >Questões Resolvidas</h3>
             </div>
 
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">

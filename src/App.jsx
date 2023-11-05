@@ -4,7 +4,7 @@ import { Login } from './pages/Login'
 import { Register } from './pages/Register'
 import { Home } from './pages/Home'
 import {Responder} from './pages/Responder'
-import {Gabarito} from './pages/Gabarito'
+import {Resolvidas} from './pages/Resolvidas'
 import {
   Route,
   Link,
@@ -43,7 +43,7 @@ function App() {
               <Route path='login' element={<Login />}/>
               <Route path='register' element={<Register />}/>
               <Route path='responder' element={<Responder />}/>
-              <Route path='gabarito' element={<Gabarito />}/>
+              <Route path='resolvidas' element={<Resolvidas />}/>
             </Route>
         </Routes>
       </BrowserRouter>

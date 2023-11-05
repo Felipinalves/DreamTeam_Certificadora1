@@ -9,6 +9,23 @@ export const Responder = () => {
 
   return (
     <>
+      <nav className="navbar bg-body-tertiary bg-nav fixed-top px-1">
+
+      <a className="btn" style={{color:'#2185D5'}}>
+        <Link to="/home">
+          <i className="bi bi-arrow-left-circle" style={{color:'#FFFFFF', fontSize: '20px'}}></i>
+        </Link>
+        </a>
+
+        <div className="mx-auto">
+          <div className="TextNav">neweinstein</div>
+        </div>
+
+        <a className="btn" style={{color:'#2185D5'}}>
+          <i className="bi bi-box-arrow-right" onClick={() => signOut(auth)} style={{color:'#FFFFFF', fontSize: '20px'}}></i>
+        </a>
+	  </nav>
+
       <div className='row justify-content-center' style={{paddingLeft:92, paddingRight:92, paddingTop:77, backgroundColor:'#EAF3FB'}}>
         <div className="card col-8">
           <div className='card-body'>
@@ -16,7 +33,7 @@ export const Responder = () => {
               <h3 >Resolução da Questão</h3>
             </div>
             <div className='mb-3 text-end'>
-              <span className='Pontuacao' style={{fontSize:"18px"}}>Pontuação: 100pts</span>
+              <span className='Pontuacao' style={{fontSize:"18px"}}>Valor: 100pts</span>
             </div>
             <div className='mb-3'>
               <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat voluptatibus quae sapiente, vero non mollitia, amet reprehenderit quo eaque alias, magnam sit odit quidem. Quas magnam odio laborum? Officia, velit!</span>
@@ -28,22 +45,12 @@ export const Responder = () => {
             <div className='mb-2'>
               <div className='text-start mb-2'>
                 <button className="TextButton_Acordeon btn btn-primary py-1 px-3" type="submit" >Responder</button>
-                {/* sumir com esse botão e apresentar os textos abaixo */}
+                {/* sumir com esse botão e apresentar os textos abaixo?? */}
               </div>
               <div className='text-start'>
                 <span className='TextButton_Acordeon'>Sua resposta está correta</span>
                 <span className='TextButton_Acordeon' style={{color:'red'}}>Sua resposta está incorreta</span>
-                <div className='mb-3'>
-                  <span className='TextButton_Acordeon'>A resposta correta é:</span>
-                </div>
                 {/* fazer função para aparecer um ou outro */}
-              </div>
-              <div>
-                <button className="TextButton_Acordeon btn btn-primary py-1 px-3" type="submit">Refazer</button>
-                <Link to='/home'>
-                  <button className="TextButton_Acordeon btn btn-outline-primary py-1 px-3 ms-3" type="submit">Voltar às questões</button>
-                </Link>
-                {/* Se acertou, só aparece o botão de voltar? Ou não? */}
               </div>
             </div>
           </div>
@@ -53,7 +60,7 @@ export const Responder = () => {
           <div className='card-body d-flex flex-column justify-content-center align-items-center'>
             <img src={imagem9334183} style={{width:110, height:110}} className='mb-3'/>
             <div><span style={{fontSize:20}}>Felipe Alves Cerquiare</span></div>
-            <span style={{fontSize:20}}>Pontuação atual:  <span className='Pontuacao' style={{fontSize:'20px'}}>100 pts</span></span>
+            <span style={{fontSize:20}}>Pontuação:  <span className='Pontuacao' style={{fontSize:'20px'}}>0 pts</span></span>
           </div>
         </div>
       </div>

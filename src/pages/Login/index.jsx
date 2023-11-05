@@ -18,7 +18,7 @@ export const Login = () => {
     <>
         <nav className="navbar bg-body-tertiary bg-nav fixed-top">
                     <span className="TextNav mx-auto">
-                        Neweinstein
+                        neweinstein
                     </span>
         </nav>
         <div className="row justify-content-center align-content-center vh-100">
