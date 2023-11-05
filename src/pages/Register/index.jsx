@@ -25,18 +25,25 @@ export const Register = () => {
                     <main className="form-signin w-100 m-auto">
                         <form onSubmit={signUpwithEmail}>
                             <h1 className="Sign-in my-4">Sign up</h1>
+                            
                             <div className="form-floating mb-2">
-                                <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"/>
+                                <input type="text" className="form-control" id="floatingName" />
+                                <label className="TextIntern" htmlFor="floatName">Nome Completo</label>
+                            </div>
+
+
+                            <div className="form-floating mb-2">
+                                <input type="email" className="form-control" id="floatingInput" />
                                 <label className="TextIntern" htmlFor="floatingInput">Email</label>
                             </div>
 
                             <div className="form-floating mb-2">
-                                <input type="password" className="form-control" id="floatingPassword" placeholder="Password"/>
+                                <input type="password" className="form-control" id="floatingPassword" />
                                 <label className="TextIntern" htmlFor="floatingPassword">Senha</label>
                             </div>
 
                             <div className="form-floating mb-4">
-                                <input type="password" className="form-control" id="cFloatingPassword" placeholder="Password"/>
+                                <input type="password" className="form-control" id="cFloatingPassword" />
                                 <label className="TextIntern" htmlFor="cFloatingPassword">Confirmar Senha</label>
                             </div>
 

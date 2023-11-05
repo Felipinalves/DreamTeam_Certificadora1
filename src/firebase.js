@@ -24,7 +24,23 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 // Initialize Cloud Firestore and get a reference to the service
-const db = getFirestore(app);
+export const db = getFirestore(app);
+
+//get questions
+export const getQuestions = async() => {
+  const querySnapshot =  await getDocs(collection(db, "questions"));
+  const allQuestions = []
+      // const allQuestions = response.docs.map((doc) =>doc.data())
+      querySnapshot.forEach((element) => {
+        const item = element.data()
+        item.id = element.id
+        allQuestions.push(item) 
+      });
+      
+      let sortedQuestions = allQuestions.sort(
+        (q1, q2) => (q2.level < q1.level) ? 1 : (q2.level > q1.level) ? -1 : 0);
+  return sortedQuestions
+}
 
 //set user information
 const setUserInformation = async (res) =>{
@@ -35,23 +51,66 @@ const setUserInformation = async (res) =>{
   console.log(docSnap.exists())
 
   if (!docSnap.exists()){
+    const questions = await getQuestions();
     const addDoc = await setDoc(docRef, {
       uid: res.user.uid,
+      displayName: res.user.displayName,
       email: res.user.email,
       level: 1,
-      score: 0
+      score: 0,
+    });
+    questions.forEach(element => {
+      const questionsRef = doc(db,"users", res.user.uid, "userQuestions", element.id)
+      setDoc(questionsRef,{
+        level: element.level,
+        solved: false,
+        attempts: 0
+      } )
     });
   }
+}
+
+//getCurrentUserInfo
+
+export const getCurrentUserInfo = async (currentUser) => {
+  const docRef = doc(db,"users", currentUser.uid)
+  const querySnapshot =  await getDocs(collection(db, "users", currentUser.uid, "userQuestions"));
+  console.log(querySnapshot)
+  const docSnap = await getDoc(docRef)
+  console.log(docSnap)
+  console.log('passei')
+
+  if (docSnap.exists()){
+    const userInfo = docSnap.data();
+    const allQuestions = []
+    // const allQuestions = response.docs.map((doc) =>doc.data())
+    querySnapshot.forEach((element) => {
+      const item = element.data()
+      item.id = element.id
+      allQuestions.push(item) 
+    });
+    
+    let sortedQuestions = allQuestions.sort(
+      (q1, q2) => (q2.level < q1.level) ? 1 : (q2.level > q1.level) ? -1 : 0);
+
+    userInfo.questions = allQuestions
+    
+    console.log(userInfo)
+    return userInfo;
+  }
+
 }
 
 //Email SingUp and SingIn
 export const signUpEmail = async (e) => {
   e.preventDefault()
-  const email = e.target[0].value;
-  const password = e.target[1].value;
+  const displayName = e.target[0].value;
+  const email = e.target[1].value;
+  const password = e.target[2].value;
   
   try{
     const res = await createUserWithEmailAndPassword(auth, email, password)
+    res.user.displayName = displayName;
     await setUserInformation(res)
 
   }catch(err){
@@ -81,6 +140,7 @@ export const signInGoogle = async (event) => {
     const res = await signInWithPopup(auth, provider)
 
     await setUserInformation(res)
+    console.log(res)
 
   }catch(err){
     console.log(err)
@@ -89,9 +149,5 @@ export const signInGoogle = async (event) => {
     
 }
 
-//get questions
-export const getQuestions = async() => {
-  const querySnapshot =  await getDocs(collection(db, "questions"));
-  return querySnapshot
-}
+
 

@@ -1,40 +1,43 @@
 import React from 'react'
 import { QuestionsCards } from '../../components/QuestionsCards';
-import { getQuestions } from '../../firebase';
+import { getCurrentUserInfo, getQuestions } from '../../firebase';
 import { useState, useEffect } from 'react';
-import { doc } from 'firebase/firestore';
+
 import imagem9334183 from '../../assets/9334243.jpg'
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 
 
 export const Home = () => {
+
+  const currentUser = useContext(AuthContext)
   const [isIconClicked, setIsIconClicked] = useState(false);
   const [questions, setQuestions] = useState([]);
+  const [userInformation, setUserInformation] = useState();
+  const [user, setUser] = useState(currentUser.currentUser)
+  // setCurrentUser = useContext(AuthContext)
+  // console.log(user.uid)
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await getQuestions();
-
-      const allQuestions = []
-      // const allQuestions = response.docs.map((doc) =>doc.data())
-      response.forEach((element) => {
-        const item = element.data()
-        item.id = element.id
-        allQuestions.push(item) 
-      
-      });
-      
-      let sortedQuestions = allQuestions.sort(
-        (q1, q2) => (q2.level < q1.level) ? 1 : (q2.level > q1.level) ? -1 : 0);
-      setQuestions(sortedQuestions)
-
-     
+      setQuestions(response);
+      const userInfo = await getCurrentUserInfo(user)
+      setUserInformation(userInfo);
     };
-
     fetchData()
-  }, []);
+  },[]);
   
+  useEffect(() => {
+    const fetchData = async () => {
+      const userInfo = await getCurrentUserInfo(user)
+      setUserInformation(userInfo);
+    };
+    fetchData()
+  },[]);
 
+ //console.log(userInformation.score)
 
   const handleClick = () => {
       setIsIconClicked(!isIconClicked);
@@ -64,8 +67,8 @@ export const Home = () => {
         <div className='card col-3 ms-4' style={{height:'250px'}}>
           <div className='card-body d-flex flex-column justify-content-center align-items-center'>
             <img src={imagem9334183} style={{width:110, height:110}} className='mb-3'/>
-            <div><span style={{fontSize:20}}>Felipe Alves Cerquiare</span></div>
-            <span style={{fontSize:20}}>Pontuação atual:  <span className='Pontuacao' style={{fontSize:'20px'}}>100 pts</span></span>
+            <div><span style={{fontSize:20}}>{userInformation? userInformation.displayName : 'carregando'}</span></div>
+            <span style={{fontSize:20}}>Pontuação atual:  <span className='Pontuacao' style={{fontSize:'20px'}}></span>{userInformation? userInformation.score : 'carregando'} pts</span>
           </div>
         </div>
       </div>

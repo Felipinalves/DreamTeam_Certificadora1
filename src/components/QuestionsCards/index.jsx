@@ -10,11 +10,11 @@ export const QuestionsCards = (props) => {
 	const questionLevel = (level) =>{
 
 		switch (level) {
-			case 0:
-				return ['Fácil', '#05FF00'];
 			case 1:
-				return ['Média', '#FFE500']
+				return ['Fácil', '#05FF00'];
 			case 2:
+				return ['Média', '#FFE500']
+			case 3:
 				return ['Difícil', '#FF0000']
 			default:
 				break;
