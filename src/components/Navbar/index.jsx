@@ -20,20 +20,19 @@ export function Navbar() {
         <i className="bi bi-box-arrow-right" onClick={() => signOut(auth)} style={{color:'#FFFFFF', fontSize: '20px'}}></i>
       </a>
 
-      <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div className="offcanvas offcanvas-start" style={{backgroundColor:"white"}} tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div className="offcanvas-header">
           <h5 className="offcanvas-title" id="offcanvasNavbarLabel" style={{color:'#303841'}}>Menu</h5>
           <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div className="offcanvas-body">
-          <ul className="navbar-nav justify-content-end flex-grow-1 pe-3"/>
-              <li className="nav-item" style={{listStyleType:"none"}}>
-                  <a className="nav-link active" aria-current="page" href='#' style={{color:'#303841'}}>Questões</a>
-              </li>
-              <hr/>
+            <li className="nav-item" style={{listStyleType:"none"}}>
+              <a className="nav-link active" aria-current="page" href="Home" style={{color:'#303841'}}>Questões</a>
+            </li>
+            <hr/>
 
             <li className="nav-item" style={{listStyleType:"none"}}>
-                <a className="nav-link active" aria-current="page" href='Resolvidas' style={{color:'#303841'}}>Questões Resolvidas</a>
+              <a className="nav-link active" aria-current="page" href="Resolvidas" style={{color:'#303841'}}>Questões Resolvidas</a>
             </li>
             <hr/>
 
