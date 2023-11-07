@@ -20,7 +20,7 @@ export const Register = () => {
                         </span>
             </nav>
         <div className="row justify-content-center align-content-center vh-100">
-            <div className="card col-sm-12 col-md-6 col-lg-4 mt-5">
+            <div className="card col-lg-4 col-md-6 col-sm-6 mt-5 centered">
                 <div className="card-body">
                     <main className="form-signin w-100 m-auto">
                         <form onSubmit={signUpwithEmail}>

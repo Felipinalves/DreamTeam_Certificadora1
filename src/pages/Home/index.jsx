@@ -49,7 +49,7 @@ export const Home = () => {
   return (
     <>
       <div className='row justify-content-center' style={{paddingLeft:92, paddingRight:92, paddingTop:77, backgroundColor:'#EAF3FB'}}>
-        <div className="card col-lg-8 col-md-7 col-sm-12">
+        <div className="card col-lg-8 col-md-7">
           <div className='card-body'>
             <div style={{marginTop: "4px", marginLeft: "8px"}}>
               <h3 >Questões</h3>
@@ -64,7 +64,7 @@ export const Home = () => {
           </div>
         </div>
 
-        <div className='card col-lg-3 col-md-4 col-sm-8 ms-4' style={{height:'250px'}}>
+        <div className='card col-lg-3 col-md-4 ms-4' style={{height:'250px'}}>
           <div className='card-body d-flex flex-column justify-content-center align-items-center'>
             <img src={imagem9334183} style={{width:110, height:110}} className='mb-3'/>
             <div><span style={{fontSize:20}}>{userInformation? userInformation.displayName : 'Carregando'}</span></div>

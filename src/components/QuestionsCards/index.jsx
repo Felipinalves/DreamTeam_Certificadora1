@@ -28,10 +28,10 @@ export const QuestionsCards = (props) => {
 				<button className={show ? "accordion-button" : "accordion-button collapsed"} type="button" 
 					aria-controls="panelsStayOpen-collapseOne" style={{color: '#303841'}}>
 					<div className="row w-100 align-items-center">
-						<div className="titulo col-lg-10 col-md-8 col-sm-6">
+						<div className="titulo col-lg-10 col-md-8">
 							{props.title}
 						</div>
-						<div className="dificuldade col-lg-2 col-md-4 col-sm-6 text-center">
+						<div className="dificuldade col-lg-2 col-md-4 text-center">
 							<span style={{color:questionLevel(props.level)[1]}} >● </span>
 							{questionLevel(props.level)[0]}
 						</div>
@@ -40,10 +40,10 @@ export const QuestionsCards = (props) => {
 			</h2>
 			<div id="panelsStayOpen-collapseOne" className={show ? 'accordion-collapse collapse show' : 'accordion-collapse collapse'}>
 				<div className="accordion-body row" style={{color:'#303841'}}>
-						<div className='col-lg-10 col-md-6 col-sm-8 p-1 TextAcordeon'>
+						<div className='col-lg-10 col-md-6 p-1 TextAcordeon'>
 							{props.description}	
 						</div>
-						<div className='col-lg-2 col-md-6 col-sm-4 p-0 text-center'>
+						<div className='col-lg-2 col-md-6 p-0 text-center'>
 							<span className='Pontuacao'>0 pontos</span>
 							<div className='mt-2'>
 								<Link to='/responder'>
