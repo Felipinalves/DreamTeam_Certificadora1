@@ -11,33 +11,43 @@ import { AuthContext } from '../../context/AuthContext';
 
 export const Resolvidas = () => {
 
-  const currentUser = useContext(AuthContext)
+  const { currentUser } = useContext(AuthContext);
   const [isIconClicked, setIsIconClicked] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [userInformation, setUserInformation] = useState();
-  const [user, setUser] = useState(currentUser.currentUser)
-  // setCurrentUser = useContext(AuthContext)
-  // console.log(user.uid)
+  const [userUid, setUserUid] = useState(currentUser.uid);
+ 
+  useEffect(() => {
+    const fetchData = async () => {
+    if(currentUser.uid){
+        setUserUid(currentUser.uid);
+        const userInfo = await getCurrentUserInfo(userUid)
+        setUserInformation(userInfo);
+    }
+    };
+    fetchData()
+  },[currentUser]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getQuestions();
-      setQuestions(response);
-      const userInfo = await getCurrentUserInfo(user)
-      setUserInformation(userInfo);
+      if(userInformation){
+        const response = await getQuestions();
+        const userQuestions = userInformation.questions
+        const solvedQuestions = [];
+        response.forEach(element => {
+          userQuestions.forEach(iten => {
+            if(element.id === iten.id && iten.solved){
+              solvedQuestions.push(element)
+            }
+          }); 
+        });
+        setQuestions(solvedQuestions);
+      }
     };
     fetchData()
-  },[]);
+  },[userInformation]);
   
-  useEffect(() => {
-    const fetchData = async () => {
-      const userInfo = await getCurrentUserInfo(user)
-      setUserInformation(userInfo);
-    };
-    fetchData()
-  },[]);
 
- //console.log(userInformation.score)
 
   const handleClick = () => {
       setIsIconClicked(!isIconClicked);

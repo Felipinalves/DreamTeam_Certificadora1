@@ -39,11 +39,20 @@ function App() {
                   <Home />
                 </ProtectedRoute>
               }/>
-              <Route path='home' element={<Home />}/>
+              
+              <Route path='responder' element={
+                <ProtectedRoute>
+                  <Responder />
+                </ProtectedRoute>
+              }/>
+              <Route path='resolvidas' element={
+                <ProtectedRoute>
+                  <Resolvidas />
+                </ProtectedRoute>
+              }/>
+              
               <Route path='login' element={<Login />}/>
               <Route path='register' element={<Register />}/>
-              <Route path='responder' element={<Responder />}/>
-              <Route path='resolvidas' element={<Resolvidas />}/>
             </Route>
         </Routes>
       </BrowserRouter>

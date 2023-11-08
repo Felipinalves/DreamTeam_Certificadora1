@@ -72,13 +72,11 @@ const setUserInformation = async (res) =>{
 
 //getCurrentUserInfo
 
-export const getCurrentUserInfo = async (currentUser) => {
-  const docRef = doc(db,"users", currentUser.uid)
-  const querySnapshot =  await getDocs(collection(db, "users", currentUser.uid, "userQuestions"));
-  console.log(querySnapshot)
+export const getCurrentUserInfo = async (id) => {
+  const docRef = doc(db,"users", id);
+  const querySnapshot =  await getDocs(collection(db, "users", id, "userQuestions"));
   const docSnap = await getDoc(docRef)
-  console.log(docSnap)
-  console.log('passei')
+
 
   if (docSnap.exists()){
     const userInfo = docSnap.data();
@@ -94,8 +92,6 @@ export const getCurrentUserInfo = async (currentUser) => {
       (q1, q2) => (q2.level < q1.level) ? 1 : (q2.level > q1.level) ? -1 : 0);
 
     userInfo.questions = allQuestions
-    
-    console.log(userInfo)
     return userInfo;
   }
 

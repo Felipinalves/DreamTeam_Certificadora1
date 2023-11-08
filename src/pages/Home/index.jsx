@@ -11,33 +11,33 @@ import { AuthContext } from '../../context/AuthContext';
 
 export const Home = () => {
 
-  const currentUser = useContext(AuthContext)
+  const {currentUser} = useContext(AuthContext)
   const [isIconClicked, setIsIconClicked] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [userInformation, setUserInformation] = useState();
-  const [user, setUser] = useState(currentUser.currentUser)
-  // setCurrentUser = useContext(AuthContext)
-  // console.log(user.uid)
+  const [userUid, setUserUid] = useState(currentUser.uid);
+
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await getQuestions();
       setQuestions(response);
-      const userInfo = await getCurrentUserInfo(user)
-      setUserInformation(userInfo);
     };
     fetchData()
   },[]);
   
   useEffect(() => {
     const fetchData = async () => {
-      const userInfo = await getCurrentUserInfo(user)
-      setUserInformation(userInfo);
+    if(currentUser.uid){
+        setUserUid(currentUser.uid);
+        const userInfo = await getCurrentUserInfo(userUid)
+        setUserInformation(userInfo);
+      }
+      console.log(currentUser)
     };
     fetchData()
-  },[]);
+  },[currentUser]);
 
- //console.log(userInformation.score)
 
   const handleClick = () => {
       setIsIconClicked(!isIconClicked);
