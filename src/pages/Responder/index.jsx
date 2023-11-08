@@ -1,18 +1,50 @@
-import React from 'react'
+import {React, useState, useEffect} from 'react'
 import { QuestionsCards } from '../../components/QuestionsCards';
-import { getQuestions } from '../../firebase';
+import { getQuestions, getCurrentUserInfo } from '../../firebase';
 import imagem9334183 from '../../assets/9334243.jpg'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 
 export const Responder = () => {
+
+  const { currentUser } = useContext(AuthContext);
+  const { id } = useParams();
+  const [question, setQuestion] = useState();
+  const [userInformation, setUserInformation] = useState();
+  const [userUid, setUserUid] = useState(currentUser.uid);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getQuestions();
+      response.forEach(element => {
+          if(element.id === id){
+            setQuestion(element);
+          }
+      });
+    };
+    fetchData()
+  },[question]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+    if(currentUser.uid){
+        setUserUid(currentUser.uid);
+        const userInfo = await getCurrentUserInfo(userUid)
+        setUserInformation(userInfo);
+      }
+      console.log(currentUser)
+    };
+    fetchData()
+  },[currentUser]);
 
   return (
     <>
       <nav className="navbar bg-body-tertiary bg-nav fixed-top px-1">
 
       <a className="btn" style={{color:'#2185D5'}}>
-        <Link to="/home">
+        <Link to="/">
           <i className="bi bi-arrow-left-circle" style={{color:'#FFFFFF', fontSize: '20px'}}></i>
         </Link>
         </a>
@@ -36,7 +68,7 @@ export const Responder = () => {
               <span className='Pontuacao' style={{fontSize:"18px"}}>Valor: 100pts</span>
             </div>
             <div className='mb-3'>
-              <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat voluptatibus quae sapiente, vero non mollitia, amet reprehenderit quo eaque alias, magnam sit odit quidem. Quas magnam odio laborum? Officia, velit!</span>
+              <span>{question? question.description : `carregando`}</span>
             </div>
             <div className="form-floating mb-3">
               <input type="text" className="form-control" id="floatingInput" placeholder="Insira sua resposta"/>
@@ -59,8 +91,8 @@ export const Responder = () => {
         <div className='card col-lg-3 col-md-4 ms-4' style={{height:'250px'}}>
           <div className='card-body d-flex flex-column justify-content-center align-items-center'>
             <img src={imagem9334183} style={{width:110, height:110}} className='mb-3'/>
-            <div><span style={{fontSize:20}}>Felipe Alves Cerquiare</span></div>
-            <span style={{fontSize:20}}>Pontuação:  <span className='Pontuacao' style={{fontSize:'20px'}}>0 pts</span></span>
+            <div><span style={{fontSize:20}}>{userInformation? userInformation.displayName : 'Carregando'}</span></div>
+            <span style={{fontSize:20}}>Pontuação:  <span className='Pontuacao' style={{fontSize:'20px'}}></span>{userInformation? userInformation.score : 'Carregando'} pts</span>
           </div>
         </div>
       </div>

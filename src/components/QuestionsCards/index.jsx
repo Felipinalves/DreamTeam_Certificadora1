@@ -46,7 +46,7 @@ export const QuestionsCards = (props) => {
 						<div className='col-lg-2 col-md-6 p-0 text-center'>
 							<span className='Pontuacao'>0 pontos</span>
 							<div className='mt-2'>
-								<Link to='/responder'>
+								<Link to={'/responder/' + props.id} >
 									<button className="TextButton_Acordeon btn btn-primary w-70 py-0 px-3" type="submit">Responder</button>
 								</Link>
 							</div>

@@ -40,7 +40,7 @@ function App() {
                 </ProtectedRoute>
               }/>
               
-              <Route path='responder' element={
+              <Route path='responder/:id' element={
                 <ProtectedRoute>
                   <Responder />
                 </ProtectedRoute>
