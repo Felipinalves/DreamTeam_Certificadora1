@@ -6,6 +6,7 @@ export const QuestionsCards = (props) => {
 
 	const[show, setShow] = useState(false)
 	const showItem = () => setShow(!show)
+	const user = props.user
 
 	const questionLevel = (level) =>{
 
@@ -39,15 +40,17 @@ export const QuestionsCards = (props) => {
 				</button>
 			</h2>
 			<div id="panelsStayOpen-collapseOne" className={show ? 'accordion-collapse collapse show' : 'accordion-collapse collapse'}>
+				
 				<div className="accordion-body row" style={{color:'#303841'}}>
+					{(user? user.level >= props.level : false)? null : <span style={{color: `red`}}>Para resolver a questã, aumente seu nível</span> }	
 						<div className='col-lg-10 col-md-6 p-1 TextAcordeon'>
 							{props.description}	
 						</div>
 						<div className='col-lg-2 col-md-6 p-0 text-center'>
-							<span className='Pontuacao'>0 pontos</span>
+							<span className='Pontuacao'>{props.score} pontos</span>
 							<div className='mt-2'>
-								<Link to={'/responder/' + props.id} >
-									<button className="TextButton_Acordeon btn btn-primary w-70 py-0 px-3" type="submit">Responder</button>
+								<Link to={(user? user.level >= props.level : false)? ('/responder/' + props.id): ''}>
+									<button className="TextButton_Acordeon btn btn-primary w-70 py-0 px-3" type="submit" disabled = {(user? user.level >= props.level : false)? ('/responder/' + props.id): true }>Responder</button>
 								</Link>
 							</div>
 						</div>
