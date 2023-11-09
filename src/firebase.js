@@ -74,23 +74,23 @@ const setUserInformation = async (res) =>{
 
 export const updateOnAnswer = async(question, user, props) => {
   const docRef = doc(db, `users`, props.id);
-  const questionRef = doc(db, `users`, userQuestions, question.id);
+  console.log(question.id)
+  const questionRef = doc(db, `users`,user.uid, `userQuestions`, question.id);
   const userLevel = (user.level === question.level)? (user.level+1) : (user.level)
   if(props.solved){
     await updateDoc(docRef, {
-      score: question.score/(2**props.attempts),
+      score: (question.score/(2**props.attempts)) + user.score,
       level: userLevel,
     })
     await updateDoc(questionRef, {
       solved: props.solved, 
-      attempts: props.attempts,
     })
   }else{
     await updateDoc(questionRef, {
       attempts: props.attempts,
     })
   }
-    
+  return
 }
 
 //getCurrentUserInfo

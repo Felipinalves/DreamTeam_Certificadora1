@@ -15,20 +15,44 @@ export const Responder = () => {
   const [userInformation, setUserInformation] = useState();
   const [userUid, setUserUid] = useState(currentUser.uid);
   const [attempts, setAttempts] = useState(0);
+  const [message, setMessage] = useState(``)
+  const [solved,setSolved] = useState()
+  const [useEffectAux, setuseEffectAux] = useState(0)
   
 
-
   const answer = (e) => {
-    const userValue = e.target.value;
-    userValue.replace(`,`,`.`)
-    console.log(userValue)
-    // if(userValue === question.answer){
-    //   updateOnAnswer(question, userInformation, {attempts: attempts, solved: true, id: userUid})
-    // }else{
-    //   setAttempts(attempts + 1)
-    //   updateOnAnswer(question, userInformation, {attempts: attempts})
-    // }
+    e.preventDefault() 
+    let userValue = e.target[0].value;
+    userValue = userValue.trim()
+    userValue = userValue.replaceAll(` `,``)
+    userValue = userValue.replace(`,`,`.`)
+    userValue = Number(userValue)
+    
+    if(!solved){
+
+      console.log(userValue)
+      if(userValue === question.answer){
+        updateOnAnswer(question, userInformation, {attempts: attempts, solved: true, id: userUid})
+        setMessage('Você acertou')
+        setuseEffectAux(useEffectAux + 1)
+      }
+      else if(isNaN(userValue)){
+        setMessage("Digite apenas números")
+      }else{
+        setAttempts(attempts + 1)
+        setMessage("Você Errou")
+        updateOnAnswer(question, userInformation, {attempts: attempts + 1, id: userUid})
+      }
+    }else{
+      if(userValue === question.answer){
+        setMessage('Você acertou, mas questões resolvidas anteriormente não somam pontos')
+      }
+      else{
+        setMessage(`Você Errou`)
+      }
+    }
   }
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +60,6 @@ export const Responder = () => {
       response.forEach(element => {
           if(element.id === id){
             setQuestion(element);
-            console.log(element)
           }
       });
     };
@@ -45,15 +68,31 @@ export const Responder = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-    if(currentUser.uid){
+      if(currentUser.uid){
         setUserUid(currentUser.uid);
         const userInfo = await getCurrentUserInfo(userUid)
         setUserInformation(userInfo);
       }
-      console.log(currentUser)
     };
     fetchData()
-  },[currentUser]);
+  },[currentUser,useEffectAux]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if(question && userInformation){
+        userInformation.questions.forEach(element => {
+          if(element.id === question.id){
+            setAttempts(element.attempts)
+            console.log(solved)
+            setSolved(element.solved)
+            console.log(solved)
+          }
+        });
+      }
+   }
+    fetchData()
+  }, [userInformation, question, solved])
+  
 
   return (
     <>
@@ -77,9 +116,10 @@ export const Responder = () => {
       <div className='row justify-content-center' style={{paddingLeft:92, paddingRight:92, paddingTop:77, backgroundColor:'#EAF3FB'}}>
         <div className="card col-lg-8 col-md-7">
           <div className='card-body'>
-            <form>
+            <form onSubmit={ answer }>
               <div style={{marginTop: "4px"}} className='mb-4'>
                 <h3 >Resolução da Questão</h3>
+                <span>{solved + ``}</span>
               </div>
               <div className='mb-3 text-end'>
                 <span className='Pontuacao' style={{fontSize:"18px"}}>Valor: {question? question.score/(2**attempts) : 'Carregando'} pts</span>
@@ -93,12 +133,12 @@ export const Responder = () => {
               </div>
               <div className='mb-2'>
                 <div className='text-start mb-2'>
-                  <button className="TextButton_Acordeon btn btn-primary py-1 px-3" type="submit" onClick={ answer } >Responder</button>
+                  <button className="TextButton_Acordeon btn btn-primary py-1 px-3" type="submit">Responder</button>
                   {/* sumir com esse botão e apresentar os textos abaixo?? */}
                 </div>
                 <div className='text-start'>
-                  <span className='TextButton_Acordeon'>Sua resposta está correta</span>
-                  <span className='TextButton_Acordeon' style={{color:'red'}}>Sua resposta está incorreta</span>
+                  <span className='TextButton_Acordeon'>{message}</span>
+                  {/* <span className='TextButton_Acordeon' style={{color:'red'}}>Sua resposta está incorreta</span> */}
                   {/* fazer função para aparecer um ou outro */}
                 </div>
               </div>
