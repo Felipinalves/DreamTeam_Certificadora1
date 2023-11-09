@@ -20,7 +20,7 @@ export const Responder = () => {
 
   const answer = (e) => {
     const userValue = e.target.value;
-    // userValue.replace(`,`,`.`)
+    userValue.replace(`,`,`.`)
     console.log(userValue)
     // if(userValue === question.answer){
     //   updateOnAnswer(question, userInformation, {attempts: attempts, solved: true, id: userUid})
