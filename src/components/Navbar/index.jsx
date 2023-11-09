@@ -1,7 +1,7 @@
 import React from 'react'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../firebase'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 export function Navbar() {
   return (
@@ -26,14 +26,20 @@ export function Navbar() {
           <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div className="offcanvas-body">
-            <li className="nav-item" style={{listStyleType:"none"}}>
-              <a className="nav-link active" aria-current="page" href="Home" style={{color:'#303841'}}>Questões</a>
-            </li>
-            <hr/>
 
-            <li className="nav-item" style={{listStyleType:"none"}}>
-              <a className="nav-link active" aria-current="page" href="Resolvidas" style={{color:'#303841'}}>Questões Resolvidas</a>
-            </li>
+            <Link to={'/'} style={{textDecoration: 'none'}}>
+              <li className="nav-item" style={{listStyleType:"none"}}>
+                <span className="nav-link active" aria-current="page"  style={{color:'#303841'}}>Questões</span>
+              </li>
+            </Link >
+
+         
+            <hr/>
+            <Link to={'resolvidas'} style={{textDecoration: 'none'}}>
+              <li className="nav-item" style={{listStyleType:"none"}}>
+              <span className="nav-link active" aria-current="page" style={{color:'#303841'}}>Questões Resolvidas</span>
+              </li>
+            </Link >
             <hr/>
 
         </div>

@@ -1,6 +1,6 @@
 import {React, useState, useEffect} from 'react'
 import { QuestionsCards } from '../../components/QuestionsCards';
-import { getQuestions, getCurrentUserInfo } from '../../firebase';
+import { getQuestions, getCurrentUserInfo, updateOnAnswer } from '../../firebase';
 import imagem9334183 from '../../assets/9334243.jpg'
 import { Link, useParams } from 'react-router-dom';
 import { useContext } from 'react';
@@ -14,6 +14,21 @@ export const Responder = () => {
   const [question, setQuestion] = useState();
   const [userInformation, setUserInformation] = useState();
   const [userUid, setUserUid] = useState(currentUser.uid);
+  const [attempts, setAttempts] = useState(0);
+  
+
+
+  const answer = (e) => {
+    const userValue = e.target.value;
+    // userValue.replace(`,`,`.`)
+    console.log(userValue)
+    // if(userValue === question.answer){
+    //   updateOnAnswer(question, userInformation, {attempts: attempts, solved: true, id: userUid})
+    // }else{
+    //   setAttempts(attempts + 1)
+    //   updateOnAnswer(question, userInformation, {attempts: attempts})
+    // }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,11 +36,12 @@ export const Responder = () => {
       response.forEach(element => {
           if(element.id === id){
             setQuestion(element);
+            console.log(element)
           }
       });
     };
     fetchData()
-  },[question]);
+  },[]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,11 +59,11 @@ export const Responder = () => {
     <>
       <nav className="navbar bg-body-tertiary bg-nav fixed-top px-1">
 
-      <a className="btn" style={{color:'#2185D5'}}>
+      <span className="btn" style={{color:'#2185D5'}}>
         <Link to="/">
           <i className="bi bi-arrow-left-circle" style={{color:'#FFFFFF', fontSize: '20px'}}></i>
         </Link>
-        </a>
+        </span>
 
         <div className="mx-auto">
           <div className="TextNav">neweinstein</div>
@@ -65,7 +81,7 @@ export const Responder = () => {
               <h3 >Resolução da Questão</h3>
             </div>
             <div className='mb-3 text-end'>
-              <span className='Pontuacao' style={{fontSize:"18px"}}>Valor: 100pts</span>
+              <span className='Pontuacao' style={{fontSize:"18px"}}>Valor: {question? question.score/(2**attempts) : 'carregando'} pts</span>
             </div>
             <div className='mb-3'>
               <span>{question? question.description : `carregando`}</span>
@@ -76,7 +92,7 @@ export const Responder = () => {
             </div>
             <div className='mb-2'>
               <div className='text-start mb-2'>
-                <button className="TextButton_Acordeon btn btn-primary py-1 px-3" type="submit" >Responder</button>
+                <button className="TextButton_Acordeon btn btn-primary py-1 px-3" type="submit" onClick={ answer } >Responder</button>
                 {/* sumir com esse botão e apresentar os textos abaixo?? */}
               </div>
               <div className='text-start'>
