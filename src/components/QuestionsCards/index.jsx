@@ -1,12 +1,38 @@
 import React from 'react'
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const QuestionsCards = (props) => {
 
 	const[show, setShow] = useState(false)
+	const [question, setQuestion] = useState()
 	const showItem = () => setShow(!show)
 	const user = props.user
+	const navigate = useNavigate()
+
+	
+	useEffect(() => {
+		if(user){
+			(user.questions).forEach(element => {
+				if(element.id === props.id) setQuestion(element)
+			});
+		}
+	}, [user])
+	
+	
+
+	const handleClick = () => {
+		if(question.solved){
+			const text = `Você já respondeu essa questão, deseja respondela novamente?`
+			if(confirm(text) == true){
+				navigate(`/responder/` + props.id)
+			}else{
+				return
+			}
+		}else{
+			navigate(`/responder/` + props.id)
+		}
+	}
 
 	const questionLevel = (level) =>{
 
@@ -49,9 +75,9 @@ export const QuestionsCards = (props) => {
 						<div className='col-lg-2 col-md-6 p-0 text-center'>
 							<span className='Pontuacao'>{props.score} pontos</span>
 							<div className='mt-2'>
-								<Link to={(user? user.level >= props.level : false)? ('/responder/' + props.id): ''}>
-									<button className="TextButton_Acordeon btn btn-primary w-70 py-0 px-3" type="submit" disabled = {(user? user.level >= props.level : false)? ('/responder/' + props.id): true }>Responder</button>
-								</Link>
+								
+									<button className="TextButton_Acordeon btn btn-primary w-70 py-0 px-3" type="submit" disabled = {(user? user.level >= props.level : false)? null : true} onClick={ handleClick }>Responder</button>
+								
 							</div>
 						</div>
 				</div>

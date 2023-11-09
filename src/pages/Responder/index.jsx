@@ -27,7 +27,7 @@ export const Responder = () => {
     userValue = userValue.replaceAll(` `,``)
     userValue = userValue.replace(`,`,`.`)
     userValue = Number(userValue)
-    
+
     if(!solved){
 
       console.log(userValue)
@@ -35,6 +35,7 @@ export const Responder = () => {
         updateOnAnswer(question, userInformation, {attempts: attempts, solved: true, id: userUid})
         setMessage('Você acertou')
         setuseEffectAux(useEffectAux + 1)
+        setSolved(true)
       }
       else if(isNaN(userValue)){
         setMessage("Digite apenas números")
@@ -83,9 +84,6 @@ export const Responder = () => {
         userInformation.questions.forEach(element => {
           if(element.id === question.id){
             setAttempts(element.attempts)
-            console.log(solved)
-            setSolved(element.solved)
-            console.log(solved)
           }
         });
       }
