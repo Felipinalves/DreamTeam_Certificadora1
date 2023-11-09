@@ -16,11 +16,8 @@ export const Resolvidas = () => {
   const [questions, setQuestions] = useState([]);
   const [userInformation, setUserInformation] = useState();
   const [userUid, setUserUid] = useState(currentUser.uid);
-  const [clickable, setClickable] = useState(false);
 
-  const passwordCheck = () => {
-    
-  }
+
  
   useEffect(() => {
     const fetchData = async () => {

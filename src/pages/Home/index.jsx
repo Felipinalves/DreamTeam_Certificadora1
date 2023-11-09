@@ -33,7 +33,6 @@ export const Home = () => {
         const userInfo = await getCurrentUserInfo(userUid)
         setUserInformation(userInfo);
       }
-      console.log(currentUser)
     };
     fetchData()
   },[currentUser]);

@@ -1,6 +1,6 @@
 import {React, useState, useEffect} from 'react'
 import { QuestionsCards } from '../../components/QuestionsCards';
-import { getQuestions, getCurrentUserInfo } from '../../firebase';
+import { getQuestions, getCurrentUserInfo, updateOnAnswer } from '../../firebase';
 import imagem9334183 from '../../assets/9334243.jpg'
 import { Link, useParams } from 'react-router-dom';
 import { useContext } from 'react';
@@ -14,6 +14,17 @@ export const Responder = () => {
   const [question, setQuestion] = useState();
   const [userInformation, setUserInformation] = useState();
   const [userUid, setUserUid] = useState(currentUser.uid);
+  const [attempts, setAttempts] = useState(0);
+
+  
+  const answer = (e) => {
+    const userValue = e.target.value;
+    if(userValue === question.answer){
+      updateOnAnswer(userUid, )
+    }else{
+      setAttempts(attempts + 1)
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,7 +76,7 @@ export const Responder = () => {
               <h3 >Resolução da Questão</h3>
             </div>
             <div className='mb-3 text-end'>
-              <span className='Pontuacao' style={{fontSize:"18px"}}>Valor: 100pts</span>
+              <span className='Pontuacao' style={{fontSize:"18px"}}>Valor: {question.score? question.score/(2^attempts) : 'carregando'} pts</span>
             </div>
             <div className='mb-3'>
               <span>{question? question.description : `carregando`}</span>
@@ -92,7 +103,7 @@ export const Responder = () => {
           <div className='card-body d-flex flex-column justify-content-center align-items-center'>
             <img src={imagem9334183} style={{width:110, height:110}} className='mb-3'/>
             <div><span style={{fontSize:20}}>{userInformation? userInformation.displayName : 'Carregando'}</span></div>
-            <span style={{fontSize:20}}>Pontuação:  <span className='Pontuacao' style={{fontSize:'20px'}}></span>{userInformation? userInformation.score : 'Carregando'} pts</span>
+            <span style={{fontSize:20}}>Pontuação:  <span className='Pontuacao' style={{fontSize:'20px'}}></span>{userInformation? userInformation : 'Carregando'} pts</span>
           </div>
         </div>
       </div>

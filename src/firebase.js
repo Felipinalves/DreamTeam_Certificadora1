@@ -42,6 +42,8 @@ export const getQuestions = async() => {
   return sortedQuestions
 }
 
+
+
 //set user information
 const setUserInformation = async (res) =>{
   const docRef = doc(db,"users", res.user.uid)
@@ -68,6 +70,13 @@ const setUserInformation = async (res) =>{
       } )
     });
   }
+}
+
+export const updateOnAnswer = async(userId, userScore , attempts) => {
+    const docRef = doc(db, `users`, userId);
+    await updateDoc(docRef, {
+      score: userScore, 
+    })
 }
 
 //getCurrentUserInfo
