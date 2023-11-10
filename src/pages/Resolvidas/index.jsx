@@ -72,7 +72,7 @@ export const Resolvidas = () => {
                 {isIconClicked ? <i className ="bi bi-sort-up" style={{fontSize:20}} /> : <i className ="bi bi-sort-down" style={{fontSize:20}} />}
               </button>
             </div>
-            {questions.map((question) => <QuestionsCards key={question.id} id={question.id} title={question.title} description = {question.description} level={question.level}/>)}
+            {questions.map((question) => <QuestionsCards key={question.id} id={question.id} title={question.title} description = {question.description} level={question.level} user={userInformation} score={question.score}/>)}
           </div>
         </div>
 

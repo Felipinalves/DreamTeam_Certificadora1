@@ -68,7 +68,7 @@ export const QuestionsCards = (props) => {
 			<div id="panelsStayOpen-collapseOne" className={show ? 'accordion-collapse collapse show' : 'accordion-collapse collapse'}>
 				
 				<div className="accordion-body row" style={{color:'#303841'}}>
-					{(user? user.level >= props.level : false)? null : <span style={{color: `red`}}>Para resolver a questã, aumente seu nível</span> }	
+					{(user? user.level >= props.level : false)? null : <span style={{color: `red`}}>Para resolver a questão, acerte pelo menos 1 do do nível anterior</span> }	
 						<div className='col-lg-10 col-md-6 p-1 TextAcordeon'>
 							{props.description}	
 						</div>

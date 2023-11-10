@@ -1,10 +1,11 @@
 import {React, useState, useEffect} from 'react'
-import { QuestionsCards } from '../../components/QuestionsCards';
 import { getQuestions, getCurrentUserInfo, updateOnAnswer } from '../../firebase';
 import imagem9334183 from '../../assets/9334243.jpg'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase';
 
 
 export const Responder = () => {
@@ -18,7 +19,7 @@ export const Responder = () => {
   const [message, setMessage] = useState(``)
   const [solved,setSolved] = useState()
   const [useEffectAux, setuseEffectAux] = useState(0)
-  
+  const navigate = useNavigate()
 
   const answer = (e) => {
     e.preventDefault() 
@@ -54,7 +55,6 @@ export const Responder = () => {
     }
   }
 
-
   useEffect(() => {
     const fetchData = async () => {
       const response = await getQuestions();
@@ -84,12 +84,15 @@ export const Responder = () => {
         userInformation.questions.forEach(element => {
           if(element.id === question.id){
             setAttempts(element.attempts)
+            if(useEffectAux === 0) setSolved(element.solved)
           }
         });
       }
    }
     fetchData()
   }, [userInformation, question, solved])
+
+
   
 
   return (
@@ -97,10 +100,12 @@ export const Responder = () => {
       <nav className="navbar bg-body-tertiary bg-nav fixed-top px-1">
 
       <span className="btn" style={{color:'#2185D5'}}>
-        <Link to="/">
-          <i className="bi bi-arrow-left-circle" style={{color:'#FFFFFF', fontSize: '20px'}}></i>
-        </Link>
-        </span>
+   
+       
+      <i className="bi bi-arrow-left-circle" style={{color:'#FFFFFF', fontSize: '20px'}} onClick={() => navigate(-1)}></i>
+         
+          
+      </span>
 
         <div className="mx-auto">
           <div className="TextNav">neweinstein</div>
@@ -117,7 +122,6 @@ export const Responder = () => {
             <form onSubmit={ answer }>
               <div style={{marginTop: "4px"}} className='mb-4'>
                 <h3 >Resolução da Questão</h3>
-                <span>{solved + ``}</span>
               </div>
               <div className='mb-3 text-end'>
                 <span className='Pontuacao' style={{fontSize:"18px"}}>Valor: {question? question.score/(2**attempts) : 'Carregando'} pts</span>
