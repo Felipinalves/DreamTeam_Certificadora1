@@ -34,23 +34,23 @@ export const Responder = () => {
       console.log(userValue)
       if(userValue === question.answer){
         updateOnAnswer(question, userInformation, {attempts: attempts, solved: true, id: userUid})
-        setMessage('Você acertou!')
+        setMessage('PARABÉNS! VOCÊ ACERTOU.')
         setuseEffectAux(useEffectAux + 1)
         setSolved(true)
       }
       else if(isNaN(userValue)){
-        setMessage("Digite apenas números")
+        setMessage("DIGITE APENAS NÚMEROS.")
       }else{
         setAttempts(attempts + 1)
-        setMessage("Você errou!")
+        setMessage("QUE PENA! VOCÊ ERROU.")
         updateOnAnswer(question, userInformation, {attempts: attempts + 1, id: userUid})
       }
     }else{
       if(userValue === question.answer){
-        setMessage('Você acertou, mas questões já resolvidas anteriormente não somam pontos')
+        setMessage('VOCÊ ACERTOU, MAS QUESTÕES JÁ RESOLVIDAS ANTERIORMENTE NÃO SOMAM PONTOS.') 
       }
       else{
-        setMessage(`Você errou!`)
+        setMessage(`QUE PENA! VOCÊ ERROU.`)
       }
     }
   }

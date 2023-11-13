@@ -69,10 +69,10 @@ export const QuestionsCards = (props) => {
 				
 				<div className="accordion-body row" style={{color:'#303841'}}>
 					{(user? user.level >= props.level : false)? null : <span style={{color: `red`}}>Para resolver a questão, acerte pelo menos uma questão do nível anterior</span> }	
-						<div className='col-lg-10 col-md-6 p-1 TextAcordeon'>
+						<div className='col-lg-10 col-md-8 p-1 TextAcordeon'>
 							{props.description}	
 						</div>
-						<div className='col-lg-2 col-md-6 p-0 text-center'>
+						<div className='col-lg-2 col-md-4 p-0 text-center'>
 							<span className='Pontuacao'>{props.score} pontos</span>
 							<div className='mt-2'>
 								
