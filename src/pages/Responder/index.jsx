@@ -34,7 +34,7 @@ export const Responder = () => {
       console.log(userValue)
       if(userValue === question.answer){
         updateOnAnswer(question, userInformation, {attempts: attempts, solved: true, id: userUid})
-        setMessage('Você acertou')
+        setMessage('Você acertou!')
         setuseEffectAux(useEffectAux + 1)
         setSolved(true)
       }
@@ -42,15 +42,15 @@ export const Responder = () => {
         setMessage("Digite apenas números")
       }else{
         setAttempts(attempts + 1)
-        setMessage("Você Errou")
+        setMessage("Você errou!")
         updateOnAnswer(question, userInformation, {attempts: attempts + 1, id: userUid})
       }
     }else{
       if(userValue === question.answer){
-        setMessage('Você acertou, mas questões resolvidas anteriormente não somam pontos')
+        setMessage('Você acertou, mas questões já resolvidas anteriormente não somam pontos')
       }
       else{
-        setMessage(`Você Errou`)
+        setMessage(`Você errou!`)
       }
     }
   }
