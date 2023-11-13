@@ -48,8 +48,9 @@ export const Responder = () => {
     }else{
       if(userValue === question.answer){
         setMessage('VOCÊ ACERTOU, MAS QUESTÕES JÁ RESOLVIDAS ANTERIORMENTE NÃO SOMAM PONTOS.') 
-      }
-      else{
+      }else if(isNaN(userValue)){
+        setMessage("DIGITE APENAS NÚMEROS.")
+      }else{
         setMessage(`QUE PENA! VOCÊ ERROU.`)
       }
     }
@@ -139,7 +140,7 @@ export const Responder = () => {
                   {/* sumir com esse botão e apresentar os textos abaixo?? */}
                 </div>
                 <div className='text-start'>
-                  <span className='TextButton_Acordeon'>{message}</span>
+                  <span className='TextButton_Acordeon' style={(message === `QUE PENA! VOCÊ ERROU.`)? {color: `red`}: null}>{message}</span>
                   {/* <span className='TextButton_Acordeon' style={{color:'red'}}>Sua resposta está incorreta</span> */}
                   {/* fazer função para aparecer um ou outro */}
                 </div>

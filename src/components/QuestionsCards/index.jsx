@@ -5,12 +5,13 @@ import { Link, useNavigate } from 'react-router-dom';
 export const QuestionsCards = (props) => {
 
 	const[show, setShow] = useState(false)
+	const[showModal, setShowModal] = useState(false)
 	const [question, setQuestion] = useState()
-	const showItem = () => setShow(!show)
 	const user = props.user
 	const navigate = useNavigate()
 
-	
+	const showItem = () => setShow(!show)
+
 	useEffect(() => {
 		if(user){
 			(user.questions).forEach(element => {
@@ -23,15 +24,18 @@ export const QuestionsCards = (props) => {
 
 	const handleClick = () => {
 		if(question.solved){
-			const text = `Você já respondeu essa questão, deseja responder novamente?`
-			if(confirm(text) == true){
-				navigate(`/responder/` + props.id)
-			}else{
-				return
-			}
+			setShowModal(true)
 		}else{
 			navigate(`/responder/` + props.id)
 		}
+	}
+
+	const navigateResponder = () =>{
+		navigate(`/responder/` + props.id)
+	}
+
+	const closeModal = () =>{
+		setShowModal(false)
 	}
 
 	const questionLevel = (level) =>{
@@ -76,27 +80,27 @@ export const QuestionsCards = (props) => {
 							<span className='Pontuacao'>{props.score} pontos</span>
 							<div className='mt-2'>
 								
-									<button className="TextButton_Acordeon btn btn-primary w-70 py-0 px-3" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled = {(user? user.level >= props.level : false)? null : true} onClick={ handleClick }>Responder</button>
+								<button className="TextButton_Acordeon btn btn-primary w-70 py-0 px-3" disabled = {(user? user.level >= props.level : false)? null : true} onClick={ handleClick }>Responder</button>
 								
 							</div>
 						</div>
-						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-								<div class="modal-header">
-									<h1 class="modal-title fs-5" id="exampleModalLabel">Aviso</h1>
-									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						<div className='modal' style={showModal? {display:`block`}:{display:`none`}}>
+							<div className="modal-dialog">
+								<div className="modal-content">
+								<div className="modal-header">
+									<h1 className="modal-title fs-5" id="exampleModalLabel">Aviso</h1>
+									<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={ closeModal }></button>
 								</div>
-								<div class="modal-body">
+								<div className="modal-body">
 									Você já respondeu essa questão, deseja responder novamente?
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-									<button type="button" class="btn btn-primary">Sim</button>
+									<button type="button" className="btn btn-secondary" data-bs-dismiss="modal" on onClick={ closeModal }>Não</button>
+									<button type="button" className="btn btn-primary" onClick={ navigateResponder }>Sim</button>
 								</div>
 								</div>
 							</div>
-							</div>
+						</div>
 				</div>
 			</div>
 		</div>
