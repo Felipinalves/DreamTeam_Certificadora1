@@ -84,7 +84,7 @@ export const QuestionsCards = (props) => {
 								
 							</div>
 						</div>
-						<div className='modal' style={showModal? {display:`block`, backgroundColor: 'black'}:{display:`none`}} aria-hidden='true'>
+						<div className='modal' style={showModal? {display:`block`, backgroundColor: 'rgb(0,0,0, 0.5)'}:{display:`none`}}>
 							<div className="modal-dialog">
 								<div className="modal-content">
 								<div className="modal-header">
