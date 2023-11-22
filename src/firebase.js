@@ -72,6 +72,9 @@ const setUserInformation = async (res) =>{
   }
 }
 
+<<<<<<< HEAD
+//Email SignUp
+=======
 export const updateOnAnswer = async(question, user, props) => {
   const docRef = doc(db, `users`, props.id);
   console.log(question.id)
@@ -121,6 +124,7 @@ export const getCurrentUserInfo = async (id) => {
 }
 
 //Email SingUp and SingIn
+>>>>>>> allan
 export const signUpEmail = async (e) => {
   e.preventDefault()
   const displayName = e.target[0].value;
@@ -153,8 +157,8 @@ export const signInEmail = async(e)=>{
 
 //Google SignUp and SingIn
 const provider = new GoogleAuthProvider();
-export const signInGoogle = async (event) => {
-  event.preventDefault();
+export const signInGoogle = async (e) => {
+  e.preventDefault();
   try{
     const res = await signInWithPopup(auth, provider)
 
