@@ -66,3 +66,6 @@ foram permitidos para visualização do Banco de Dados utilizado nesse projeto (
 https://console.firebase.google.com/u/0/project/certificadora1-23fb9/overview
 
 Qualquer dificuldade, entrem em contato conosco.
+
+## Vídeo referente às entregas
+https://drive.google.com/file/d/1q_ZzrhnkSC5hPrT8ikVMBEnA9HLnpHgj/view?usp=sharing
