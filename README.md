@@ -20,6 +20,9 @@ O projeto Neweinstein consiste no desenvolvimento de um sistema web voltado para
 
 O Neweinstein apresenta dez problemas de Física do Ensino Médio, os quais abordam os mais variados temas, sendo organizados em diferentes níveis de dificuldade (fácil, médio e difícil). 
 
+#### Limitação do Projeto
+O projeto não possui responsividade, sendo feito a princípio única e exclusivamente para uso em Desktops, além de não permitir que o usuário esqueça a senha e possa alterá-la.
+
 
 ## Repositório do Projeto
 
